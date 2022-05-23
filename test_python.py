@@ -2,3 +2,4 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
 echo "test"
+echo "test2"
