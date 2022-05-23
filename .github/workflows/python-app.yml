@@ -22,9 +22,8 @@ jobs:
     - name: Test with MyPy
       run: |
         echo "TESTING"
-        grep ".py$" <<< `git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}`
-
-#        git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main} | grep ".py$"
+        git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main} > test.txt
+        grep ".py$" test.txt
 
 #     - name: Install poetry
 #       run: |
