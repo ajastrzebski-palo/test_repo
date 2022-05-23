@@ -37,6 +37,7 @@ jobs:
     - name: Test with MyPy
       run: |
         echo "test"
+        echo origin/${GITHUB_BASE_REF:-main}
 #        git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main} | grep ".py$"
 #        echo ${PIPESTATUS[0]} ${PIPESTATUS[2]} | grep -qE '^[0 ]+$'
 #        git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-master}
