@@ -25,6 +25,7 @@ jobs:
       run: |
         echo "test"
         echo "origin/${GITHUB_BASE_REF:-main}"
+        git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main} | grep ".py$"
 #        git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main} | grep ".py$"
 #     - name: Install poetry
 #       run: |
@@ -39,15 +40,3 @@ jobs:
 #    - name: Test with pytest
 #      run: |
 #        pytest
-<<<<<<< HEAD
-    - name: Test with MyPy
-      run: |
-        echo "test"
-        echo origin/${GITHUB_BASE_REF:-main}
-#        git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main} | grep ".py$"
-=======
-
->>>>>>> b50536abc55347d07876fba8ef198fc868101818
-#        echo ${PIPESTATUS[0]} ${PIPESTATUS[2]} | grep -qE '^[0 ]+$'
-#        git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-master}
-
