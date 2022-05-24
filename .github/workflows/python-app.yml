@@ -5,9 +5,8 @@ name: test_workf
 
 on:
   push:
-    branches:
-      - 'main'
-
+    branches: [ main ]
+  pull_requests:
 jobs:
   pr-checker:
     runs-on: ubuntu-latest
@@ -39,6 +38,7 @@ jobs:
         cat 4.txt
         echo "CAT5"
         cat 5.txt
+
 #        echo "GREP"
 #        grep "py" test.txt
 
