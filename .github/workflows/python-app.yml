@@ -28,7 +28,7 @@ jobs:
         then
           echo exist
         else
-          exit "Please update CHANGELOG.md"
+          exit ">>>Please update CHANGELOG.md<<<"
         fi
     # - name: Test with MyPy
     #   shell: bash
