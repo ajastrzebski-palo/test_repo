@@ -22,9 +22,8 @@ jobs:
     - name: Test with MyPy
       shell: bash
       run: |
-        git fetch origin main.main
         echo "TESTING"
-        git diff --name-only --diff-filter=ACM main > test.txt
+        git diff --name-only --diff-filter=ACM origin/main origin/${GITHUB_HEAD_REF} > test.txt
         echo "CAT"
         cat test.txt
         echo "GREP"
