@@ -5,7 +5,8 @@ name: test_workf
 
 on:
   push:
-    branches: [main]
+    branches:
+      - 'main'
 
 jobs:
   pr-checker:
@@ -22,13 +23,20 @@ jobs:
     - name: Test with MyPy
       shell: bash
       run: |
-        git fetch origin main
+        git fetch origin main:main
         echo "TESTING"
-        git diff --name-only --diff-filter=ACM origin/main..HEAD > test.txt
-        echo "CAT"
-        cat test.txt
-        echo "GREP"
-        grep "py" test.txt
+        git diff --name-only --diff-filter=ACM origin/main..HEAD > 1.txt
+        git diff --name-only --diff-filter=ACM origin/main > 2.txt
+        git diff --name-only --diff-filter=ACM main > 3.txt
+        echo "CAT1"
+        cat 1.txt
+        echo "CAT2"
+        cat 2.txt
+        echo "CAT3"
+        cat 3.txt
+
+#        echo "GREP"
+#        grep "py" test.txt
 
 #      - run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
 
