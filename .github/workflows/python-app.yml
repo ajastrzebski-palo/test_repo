@@ -6,7 +6,7 @@ name: test_workf
 on:
   push:
     branches: [ main ]
-  pull_requests:
+
 jobs:
   pr-checker:
     runs-on: ubuntu-latest
