@@ -6,8 +6,9 @@ name: test_workf
 on:
   push:
     branches:
-      - 'main'
+      - main
   pull_request:
+  workflow_dispatch:
 jobs:
   pr-checker:
     runs-on: ubuntu-latest
@@ -20,25 +21,34 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: "3.10"
-    - name: Test with MyPy
+    - name: CHANGELOG.md update
       shell: bash
       run: |
         echo "TESTING"
-        git diff --name-only --diff-filter=ACM origin/main..HEAD > 1.txt
-        git diff --name-only --diff-filter=ACM origin/main > 2.txt
-        git diff --name-only --diff-filter=ACM main > 3.txt
-        git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > 4.txt
-        git diff --name-only HEAD^ HEAD > 5.txt
-        echo "CAT1"
-        cat 1.txt
-        echo "CAT2"
-        cat 2.txt
-        echo "CAT3"
-        cat 3.txt
-        echo "CAT4"
-        cat 4.txt
-        echo "CAT5"
-        cat 5.txt
+        echo github.base_ref
+        echo ${{ github.base_ref }}
+        echo github.repository
+        echo ${{ github.repository }}
+
+          if git diff --name-only HEAD^ HEAD | { grep --invert-match "CHANGELOG.md" && true ; }
+          then
+            exit ">>>Please update CHANGELOG.md<<<"
+          fi
+
+    # - name: Test with MyPy
+    #   shell: bash
+    #   run: |
+    #     echo "TESTING"
+    #     $diff = git diff --name-only HEAD^ HEAD
+
+    # - name: "check CHANGELOG.md"
+    #     git diff --name-only HEAD^ HEAD
+
+#        git diff --name-only --diff-filter=ACM origin/main..HEAD > 1.txt
+#        git diff --name-only --diff-filter=ACM origin/main > 2.txt
+#        git diff --name-only --diff-filter=ACM main > 3.txt
+#        git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > 4.txt
+#        git diff --name-only HEAD^ HEAD | grep "CHANGELOG.md"
 #        echo "GREP"
 #        grep "py" test.txt
 
