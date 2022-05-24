@@ -24,12 +24,20 @@ jobs:
       shell: bash
       run: |
         echo "TESTING"
-        if git diff --name-only HEAD^ HEAD | {grep "CHANGELOG.md" || true;}
+        if git diff --name-only HEAD^ HEAD | { grep "CHANGELOG.md" || true; }
         then
           echo exist
         else
           exit "Please update CHANGELOG.md"
         fi
+    # - name: Test with MyPy
+    #   shell: bash
+    #   run: |
+    #     echo "TESTING"
+    #     $diff = git diff --name-only HEAD^ HEAD
+
+    # - name: "check CHANGELOG.md"
+    #     git diff --name-only HEAD^ HEAD
 
 #        git diff --name-only --diff-filter=ACM origin/main..HEAD > 1.txt
 #        git diff --name-only --diff-filter=ACM origin/main > 2.txt
