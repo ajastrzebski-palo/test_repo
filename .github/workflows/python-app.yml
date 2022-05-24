@@ -27,7 +27,7 @@ jobs:
         if git diff --name-only HEAD^ HEAD | grep --quiet "CHANGELOG.md" ; then
           echo exist
         else
-          echo not found
+          exit Please update CHANGELOG.md
         fi
 
 #        git diff --name-only --diff-filter=ACM origin/main..HEAD > 1.txt
