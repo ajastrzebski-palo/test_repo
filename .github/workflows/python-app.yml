@@ -24,7 +24,7 @@ jobs:
       shell: bash
       run: |
         echo "TESTING"
-        if git diff --name-only HEAD^ HEAD | { grep "CHANGELOG.md" || true; }
+        if git diff --name-only HEAD^ HEAD | { grep "CHANGELOG.md" ^ true; }
         then
           echo exist
         else
