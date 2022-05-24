@@ -23,7 +23,6 @@ jobs:
     - name: Test with MyPy
       shell: bash
       run: |
-        git fetch origin main:main
         echo "TESTING"
         git diff --name-only --diff-filter=ACM origin/main..HEAD > 1.txt
         git diff --name-only --diff-filter=ACM origin/main > 2.txt
