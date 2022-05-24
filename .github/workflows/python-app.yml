@@ -7,7 +7,9 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - branch
 jobs:
   pr-checker:
     runs-on: ubuntu-latest
