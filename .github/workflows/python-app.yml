@@ -28,6 +28,7 @@ jobs:
         git diff --name-only --diff-filter=ACM origin/main > 2.txt
         git diff --name-only --diff-filter=ACM main > 3.txt
         git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > 4.txt
+        git diff --name-only HEAD^ HEAD > 5.txt
         echo "CAT1"
         cat 1.txt
         echo "CAT2"
@@ -36,6 +37,8 @@ jobs:
         cat 3.txt
         echo "CAT4"
         cat 4.txt
+        echo "CAT5"
+        cat 5.txt
 #        echo "GREP"
 #        grep "py" test.txt
 
