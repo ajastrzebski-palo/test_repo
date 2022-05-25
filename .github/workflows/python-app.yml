@@ -27,23 +27,20 @@ jobs:
       if: github.ref_name == 'main'
       run: |
         echo "TESTING"
-        echo github.ref_name
-        echo ${{ github.ref_name }}
-        echo github.ref
-        echo ${{ github.ref }}
-        echo github.head_ref
-        echo ${{ github.head_ref }}
-        echo github.base_ref
-        echo ${{ github.base_ref }}
-        echo github.repository
-        echo ${{ github.repository }}
-
-          if git diff --name-only HEAD^ HEAD | { grep "CHANGELOG.md" && true ; }
-          then
-            echo CHANGELOG.md updated
-          else
-            exit ">>>Please update CHANGELOG.md<<<"
-          fi
+        echo "####github.ref_name====" ${{ github.ref_name }}
+        echo "####github.ref====" ${{ github.ref }}
+        echo "####github.head_ref==== " ${{ github.head_ref }}
+        echo "####github.base_ref==== " ${{ github.base_ref }}
+        echo "####github.repository==== " ${{ github.repository }}
+        echo "####git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-master}==== " `git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-master}`
+        echo "####git diff --name-only HEAD^ HEAD==== " `git diff --name-only HEAD^ HEAD`
+        if git diff --name-only --diff-filter=ACM HEAD^ HEAD | grep "CHANGELOG.md" | xargs
+        then
+          echo CHANGELOG.md updated
+        else
+          echo Please update CHANGELOG.md
+          exit 5
+        fi
 
     # - name: Test with MyPy
     #   shell: bash
