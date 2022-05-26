@@ -1,2 +1,0 @@
-x = adsad
-y = "ble"
