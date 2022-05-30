@@ -10,6 +10,7 @@ on:
       - branch
   pull_request:
   workflow_dispatch:
+  paths: 'panser_core_libraries/**'
 jobs:
   pr-checker:
     runs-on: ubuntu-latest
@@ -31,9 +32,6 @@ jobs:
         echo "####github.head_ref==== " ${{ github.head_ref }}
         echo "####github.base_ref==== " ${{ github.base_ref }}
         echo "####github.repository==== " ${{ github.repository }}
-        echo "####github.action_path==== " ${{ github.action_path }}
-        echo "####github.event_path==== " ${{ github.event_path }}
-        echo "####github.path==== " ${{ github.path }}
         echo "####git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}==== " `git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}`
         echo "####git diff --name-only HEAD^ HEAD==== " `git diff --name-only HEAD^ HEAD`
         if git diff --name-only --diff-filter=ACM HEAD^ HEAD | grep ".py$" | xargs ; then
