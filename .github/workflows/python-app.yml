@@ -24,6 +24,7 @@ jobs:
         python-version: "3.10"
     - name: CHANGELOG.md update
       shell: bash
+      paths: 'panser_core_libraries/**'
       run: |
         echo "TESTING"
         echo "####github.ref_name====" ${{ github.ref_name }}
