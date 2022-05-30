@@ -8,9 +8,10 @@ on:
     branches:
       - main
       - branch
+    paths: 'panser_core_libraries/**'
   pull_request:
   workflow_dispatch:
-  paths: 'panser_core_libraries/**'
+
 jobs:
   pr-checker:
     runs-on: ubuntu-latest
