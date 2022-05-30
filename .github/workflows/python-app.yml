@@ -32,12 +32,13 @@ jobs:
         echo "####github.repository==== " ${{ github.repository }}
         echo "####git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}==== " `git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}`
         echo "####git diff --name-only HEAD^ HEAD==== " `git diff --name-only HEAD^ HEAD`
-        if git diff --name-only --diff-filter=ACM HEAD^ HEAD | grep "CHANGELOG.md" | xargs
-        then
-          echo CHANGELOG.md updated
-        else
-          echo Please update CHANGELOG.md
-          exit 5
+        if git diff --name-only --diff-filter=ACM HEAD^ HEAD | grep ".py$" | xargs ; then
+          if git diff --name-only --diff-filter=ACM HEAD^ HEAD | grep "CHANGELOG.md" | xargs ; then
+            echo CHANGELOG.md updated
+          else
+            echo Please update CHANGELOG.md
+            exit 5
+          fi
         fi
 
     # - name: Test with MyPy
