@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - main
-      - branch
     paths: 'panser_core_libraries/**'
   pull_request:
     paths: 'panser_core_libraries/**'
