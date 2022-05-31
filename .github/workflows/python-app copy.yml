@@ -1,17 +1,14 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: test_workf
+name: merge_to_main_check_CHANGELOG
 
 on:
-  push:
-    paths: 'panser_core_libraries/**'
-  pull_request:
-    paths: 'panser_core_libraries/**'
-  workflow_dispatch:
-
+  pull_request_target:
+    branches:
+      - main
 jobs:
-  pr-checker:
+  CHANGELOG.md update:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repo
