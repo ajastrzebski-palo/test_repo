@@ -1,0 +1,74 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: merge_to_main_check_CHANGELOG
+
+on:
+  push:
+    paths: 'panser_core_libraries/**'
+  pull_request:
+    paths: 'panser_core_libraries/**'
+  workflow_dispatch:
+
+jobs:
+  pr-checker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+    - name: CHANGELOG.md
+      shell: bash
+      run: |
+        echo "TESTING"
+        echo "####github.ref_name====" ${{ github.ref_name }}
+        echo "####github.ref====" ${{ github.ref }}
+        echo "####github.head_ref==== " ${{ github.head_ref }}
+        echo "####github.base_ref==== " ${{ github.base_ref }}
+        echo "####github.repository==== " ${{ github.repository }}
+        echo "####git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}==== " `git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}`
+        echo "####git diff --name-only HEAD^ HEAD==== " `git diff --name-only HEAD^ HEAD`
+        if git diff --name-only --diff-filter=ACM HEAD^ HEAD | grep "CHANGELOG.md" | xargs ; then
+          echo CHANGELOG.md updated
+        else
+          echo Please update CHANGELOG.md
+          exit 5
+        fi
+
+    # - name: Test with MyPy
+    #   shell: bash
+    #   run: |
+    #     echo "TESTING"
+    #     $diff = git diff --name-only HEAD^ HEAD
+
+    # - name: "check CHANGELOG.md"
+    #     git diff --name-only HEAD^ HEAD
+
+#        git diff --name-only --diff-filter=ACM origin/main..HEAD > 1.txt
+#        git diff --name-only --diff-filter=ACM origin/main > 2.txt
+#        git diff --name-only --diff-filter=ACM main > 3.txt
+#        git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > 4.txt
+#        git diff --name-only HEAD^ HEAD | grep "CHANGELOG.md"
+#        echo "GREP"
+#        grep "py" test.txt
+
+#      - run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
+
+#     - name: Install poetry
+#       run: |
+#         python -m pip install poetry==1.1.12
+#         poetry config virtualenvs.create false
+#     - name: Install dependencies
+#       run: |
+#         poetry install --no-root
+#     - name: Lint with flake8
+#       run: |
+#         flake8
+#    - name: Test with pytest
+#      run: |
+#        pytest
