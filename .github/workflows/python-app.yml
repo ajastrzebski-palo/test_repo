@@ -5,9 +5,8 @@ name: test_workf
 
 on:
   push:
-    paths: 'panser_core_libraries/**'
+    branches: [ main ]
   pull_request:
-    paths: 'panser_core_libraries/**'
   workflow_dispatch:
 
 jobs:
