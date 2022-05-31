@@ -4,9 +4,7 @@
 name: merge_to_main_check_CHANGELOG
 
 on:
-  pull_request_target:
-    branches:
-      - main
+  pull_request: [ main ]
 jobs:
   CHANGELOG.md update:
     runs-on: ubuntu-latest
