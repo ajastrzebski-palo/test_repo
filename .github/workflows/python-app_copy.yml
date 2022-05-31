@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  CHANGELOG.md_update:
+  CHANGELOGmdupdate:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repo
