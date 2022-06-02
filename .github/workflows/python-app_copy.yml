@@ -4,8 +4,6 @@
 name: merge_to_main_check_CHANGELOG
 
 on:
-  push:
-    branches: [branch2]
   pull_request:
     branches: [ main ]
 jobs:
