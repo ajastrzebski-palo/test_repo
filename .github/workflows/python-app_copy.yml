@@ -14,20 +14,15 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: Setup Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.10"
     - name: CHANGELOG.md
       shell: bash
       run: |
-        echo "####git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}====  " `git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}`
-        echo ""
-        echo ""
-        echo "####git diff --name-only HEAD^ HEAD====  " `git diff --name-only HEAD^ HEAD`
-        echo ""
-        echo ""
-
+        echo "====git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}====  "
+        echo `git diff --name-only --diff-filter=ACM origin/${GITHUB_BASE_REF:-main}`
+        echo " "
+        echo "====git diff --name-only --diff-filter=ACM HEAD^ HEAD====  "
+        echo `git diff --name-only --diff-filter=ACM HEAD^ HEAD`
+        echo " "
         if git diff --name-only --diff-filter=ACM HEAD^ HEAD | grep "CHANGELOG.md" | xargs ; then
           echo CHANGELOG.md updated
         else
